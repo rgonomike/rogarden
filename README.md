@@ -6,8 +6,14 @@ Basic app with scheduler for the relays, temperature sensor display and humidity
 Works nicely on a RPI with RaspAP if no internet is available in the area.
 
 <img src="https://github.com/rgonomike/rogarden/blob/main/app.png" width="200">
+# Usage
 
-Donations welcomed
+```
+cd [path_to_rogarden]
+/usr/bin/python3 -m flask run -h 0.0.0.0
+```
+
+# Donations welcomed:
 
 BTC: bc1q9avqkdrzu39ckq3298qhmclufchvt68myuf5ys8gaus5cl6ydy9qf8dpcs
 
