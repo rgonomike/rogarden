@@ -13,7 +13,7 @@ cd [path_to_rogarden]
 /usr/bin/python3 -m flask run -h 0.0.0.0
 ```
 
-# Donations welcomed:
+# Donations:
 
 BTC: bc1q9avqkdrzu39ckq3298qhmclufchvt68myuf5ys8gaus5cl6ydy9qf8dpcs
 
