@@ -1,0 +1,14 @@
+[Unit]
+Description=Rogarden Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -m flask run -h 0.0.0.0
+WorkingDirectory=/opt/rogarden
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
