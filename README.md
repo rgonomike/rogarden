@@ -2,8 +2,9 @@
 WebApp for garden watering system
 
 Basic app with scheduler for the relays, temperature sensor display and humidity display.
+
 Works nicely on a RPI with RaspAP if no internet is available in the area.
-Add some security before exposing online. 
+
 <img src="https://github.com/rgonomike/rogarden/blob/main/app.png" width="200">
 
 Donations welcomed
