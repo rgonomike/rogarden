@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/leaf_login.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/login_form.css')}}">
+{% endblock %}
+{% block content %}
+	
+<div id="container" class="animated fadeIn animation-duration-100ms">
+	<div id="loginbox" class="animated fadeIn animation-duration-500ms " >
+	
+		<form class="myForm" action="" method="post" novalidate>
+			<div class="text-center animated zoomIn animation-duration-500ms"><img
+			src="{{ url_for('static', filename='logo_rogarden_200x200.png') }}" width="40%" alt="Rogarden"/>
+			</div>
+			{{ form.hidden_tag() }}
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				{{ form.username(class="form-control", value="", placeholder="User") }}<br>
+				{% for error in form.username.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+				{{ form.password(size=32, class="form-control", placeholder="Password") }}<br>
+				{% for error in form.password.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+			</div>
+			<div class="form-group">
+					<input type="submit" name="submit" class="btn btn-success btn-md" value="Login" />
+			</div>
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					{% for category, message in messages %}
+						{% if category in ('success', 'danger') %}
+							<div class="alert alert-{{ category }} alert-dismissible fade in animated shake animation-duration-500ms"
+								 role="alert">
+								<strong>{{ message }}</strong>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		
+		</form>	
+		{% if appconfig['REGISTRATION'] == '1' %}<p><small>New User? <a href="{{ url_for('register') }}">Click to Register!</a></small></p>{% endif %}
+		{% include 'footer.html' %}
+	</div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script src="{{ url_for('static', filename='js/TweenMax.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/leaf_login.js') }}"></script>
+
+{% endblock %}

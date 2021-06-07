@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+
+{% endblock %}
+{% block app_content %}
+		<div class="wrapper">
+			<div class="container-fluid" id="body-container-fluid">
+				<div class="container">
+                    <div class="well well-sm col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        <h1 class="display-3"><span class="animated hinge animation-duration-5s delay-2s"><img src="{{url_for('static', filename='500.png')}}" width="35%" alt="Experian" /></span>You just broke something...</h1>
+                    <p><a href="{{ url_for('index') }}">Back</a></p>
+                    </div>
+                </div>
+			</div>
+		</div>
+{% endblock %}

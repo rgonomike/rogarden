@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/glyphiconSpin.css')}}">
+{% endblock %}
+{% block app_content %}
+		<div class="wrapper">
+			<div class="container-fluid" id="body-container-fluid">
+				<div class="container">
+                    <div class="well well-sm col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <h1 class="display-1">4<span class="glyphicon glyphicon-cog animated hinge animation-duration-5s delay-2s"></span>4</h1>
+                    <p class="lower-case">Erghhh... Seems like this page doesn't exist</p>
+                    <p><a href="{{ url_for('index') }}">Back</a></p>
+                    </div>
+                </div>
+			</div>
+		</div>
+{% endblock %}

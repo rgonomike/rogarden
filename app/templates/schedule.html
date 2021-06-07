@@ -1,0 +1,78 @@
+{% block dl %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <img src="{{ url_for('static', filename=get_image('logo_login_page.png')) }}" alt="Experian"/>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="" method="post" autocomplete="off" onsubmit="return subscribeFunc()">
+                {{ form.hidden_tag() }}
+                <table class="table-subscribe">
+                    <tr>
+                        <td><label for="rep_name">Customer</label></td>
+                        <td><img class="animated pulse infinite" style="padding-right: 20px; padding left: 20px;"
+                                 src="{{ url_for('static', filename=get_image(frontend.customer.logo)) }}"
+                                 alt="{{ frontend.customer.name }}"/> {{ frontend.name }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="rep_name">Report</label></td>
+                        <td><span class="glyphicon {{ report.glyphicon }}"></span> {{ report.name }}</td>
+                    </tr>
+                    {% if options.need_depth %}
+                        <tr>
+                            <td><label for="rep_name"><span class="glyphicon glyphicon glyphicon-time"></span>
+                                Depth</label></td>
+                            <td>{{ options.from_val }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if options.need_calendar %}
+                        <tr>
+                            <td><label for="rep_name"><span class="glyphicon glyphicon glyphicon-calendar"></span> From</label>
+                            </td>
+                            <td>{{ options.from_val }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if options.multidimension %}
+                        <tr>
+                            <td><label for="rep_name"><span class="glyphicon glyphicon glyphicon-zoom-in"></span> By
+                                Dimension</label></td>
+                            <td>{{ options.dim.split('_')[1] }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if options.need_split %}
+                        <tr>
+                            <td><label for="rep_name"><span class="glyphicon glyphicon glyphicon-search"></span>
+                                By</label></td>
+                            <td>{{ options.timesplit.split(' ')[1] }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td><label for="recipient"><span class="glyphicon glyphicon glyphicon-envelope"></span>
+                            Recipient</label></td>
+                        <td>{{ logged_user().email }}</td>
+                    </tr>
+                </table>
+                <p>{{ form.sub_name }}</p>
+                <p>{{ form.frontend_code }}</p>
+                <p>{{ form.product_code }}</p>
+                <p>{{ form.report_code }}</p>
+                <p>{{ form.datefrom_sub }}</p>
+                <p>{{ form.dateto_sub }}</p>
+                <p>{{ form.users }}</p>
+                <p>{{ form.dpth_sub }}</p>
+                <p>{{ form.tsplit_sub }}</p>
+                <p>{{ form.dim_sub }}</p>
+                <h4>How often would you like to receive this report?</h4>
+                <p>{{ form.frequency }}</p>
+                <h4>When do you want to receive it? (UTC)</h4>
+                <p>{{ form.hour_of_day }}</p>
+                <div class="subscribe_confirm"><input type="submit" value="Subscribe"/></div>
+                <div id="subscribe_errors"></div>
+            </form>
+            <br>
+            <p><small><span class="alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Any filter currently applied will not be considered in subscriptions. Only 1 subscription per report is allowed.</span></small>
+            </p>
+        </div>
+    </div>
+{% endblock %}

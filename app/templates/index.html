@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-left animated fadeIn animation-duration-500ms" style=" position: absolute; z-index: -100; top:200; left:0;"><img
+				src="{{ url_for('static', filename='logo_rogarden_200x200.png') }}" width="75%" alt="Rogarden"/>
+</div>
+<div class="container">
+	{% if appconfig['SENSORS_ACTIVATED'] == '1' %}
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				  <div class="panel-heading text-center">Temperature</div>
+				  <div class="panel-body" style="overflow:hidden;  text-align: center;"><div id="T1" style="font-size:4vw;"><div class="lds-ring"></div></div></div>
+			</div>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				  <div class="panel-heading text-center">Humidity</div>
+				  <div class="panel-body" style="overflow:hidden;  text-align: center;"><div id="H1" style="font-size:4vw;"><div class="lds-ring"></div></div></div>
+			</div>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				  <div class="panel-heading text-center">Moisture</div>
+				  <div class="panel-body" style="overflow:hidden;  text-align: center;"><div id="M1" style="font-size:4vw;"><div class="lds-ring"></div></div></div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	{% if appconfig['RELAYS_ACTIVATED'] == '1' %}
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel panel-default">
+			  <div class="panel-heading text-center">Relay Settings</div>
+			  <div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-striped" >
+					  <thead>
+						<tr>
+						  <th scope="col">Relay</th>
+						  <th scope="col">Status</th>
+						  <!--<th scope="col">Last Started</th>
+						  <th scope="col">Last Stopped</th>
+						  <th scope="col">Duration</th>-->
+						  <th scope="col">Scheduler</th>						  
+						</tr>
+					  </thead>
+					  <tbody>
+						
+						{% for name, details in relays.items() %}
+						<tr>
+							<td>{{ name }}</td>
+							<td><input id="{{ name }}" value="{{ name }}" type="checkbox" {% if details.state == 0 %}checked{% else %}{% endif %} data-toggle="toggle" data-onstyle="success" data-offstyle="danger"></td>
+							<!--<td id="{{ name }}_start">{{ details.last_start_dt }}</td>
+							<td id="{{ name }}_stop">{{ details.last_stop_dt }}</td>
+							<td id="{{ name }}_duration">{{ details.last_run_duration }}</td>-->
+							<td>
+							{% for schedule, sched_details in relays[name]['schedules'].items() %}
+								{% if sched_details.active %}
+									<span class="glyphicon glyphicon-play" style="color:green"></span> {{ schedule }} </br>
+								{% else %}
+									<span class="glyphicon glyphicon-stop" style="color:red"></span> {{ schedule }} </br>
+								{% endif %}
+							{% endfor %}
+							</td>
+						</tr>
+						{% endfor %}
+					  </tbody>
+					</table>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel panel-default">
+			  <div class="panel-heading text-center">Relay Stats</div>
+			  <div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-striped">
+					  <thead>
+						<tr>
+						  <th scope="col">Relay</th>
+						  <th scope="col">Last Started</th>
+						  <th scope="col">Last Stopped</th>
+						  <th scope="col">Duration</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						
+						{% for name, details in relays.items() %}
+						<tr>
+							<td>{{ name }}</td>
+							<td id="{{ name }}_start">{{ details.last_start_dt }}</td>
+							<td id="{{ name }}_stop">{{ details.last_stop_dt }}</td>
+							<td id="{{ name }}_duration">{{ details.last_run_duration }}</td>
+						</tr>
+						{% endfor %}
+					  </tbody>
+					</table>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	{% if appconfig['CHARTS_ACTIVATED'] == '1' %}
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<div class="panel panel-default">
+			  <div class="panel-heading text-center">CHART</div>
+			  <div class="panel-body">
+				SPACE FOR CHART
+			 </div>
+			</div>
+		</div>
+	</div>
+	{% endif %}	
+</div>
+{% include 'footer.html' %}	
+{% endblock %}
